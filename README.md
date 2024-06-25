@@ -1,24 +1,65 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false, unique: true |
+| password           | string | null: false |
+| last_name          | string | null: false |
+| first_name         | string | null: false |
+| rb_last_name       | string | null: false |
+| rb_first_name      | string | null: false |
+| birthday           | string | null: false |
 
-* Ruby version
 
-* System dependencies
+### Association
+- has_many :items
+- has_many :buys
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| item               | string | null: false |
+| description        | text   | null: false |
+| condition          | string | null: false |
+| category           | string | null: false |
+| price              | string | null: false |
+| post_cost          | string | null: false |
+| postage            | string | null: false |
+| ship_date          | string | null: false |
+| user           | references | null: false, foreign_key: true|
+| address        | references | null: false, foreign_key: true|
 
-* Database initialization
+### Association
+- belongs_to :user
+- belongs_to :address
+- belongs_to :buys
+- has_one_attached :image
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## buys テーブル
 
-* Deployment instructions
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| user_id           | references | null: false, foreign_key: true|
+| item_id           | references | null: false, foreign_key: true|
 
-* ...
+### Association
+- belongs_to :user
+- belongs_to :items
+
+## address テーブル
+
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| name               | string | null: false |
+| name               | string | null: false |
+| name               | string | null: false |
+| name               | string | null: false |
+| name               | string | null: false |
+| name               | string | null: false |
+
+### Association
