@@ -24,12 +24,12 @@
 | ------------------ | ------- | ----------- |
 | item               | string  | null: false |
 | description        | text    | null: false |
-| category           | integer | null: false |
-| condition          | integer | null: false |
-| post_cost          | integer | null: false |
-| sender             | integer | null: false |
-| ship_date          | integer | null: false |
-| price              | float   | null: false |
+| category_id        | integer | null: false |
+| condition_id       | integer | null: false |
+| post_cost_id       | integer | null: false |
+| sender_id          | integer | null: false |
+| ship_date_id       | integer | null: false |
+| price              | integer | null: false |
 | user               | references | null: false, foreign_key: true|
 
 ### Association
@@ -51,16 +51,17 @@
 - has_one :address
 
 
-## address テーブル
+## addresses テーブル
 
 | Column             | Type       | Options     |
 | ------------------ | ---------- | ----------- |
-| post_code          | references | null: false, foreign_key: true|
-| sender             | integer    | null: false |
-| city               | references | null: false, foreign_key: true|
-| street             | references | null: false, foreign_key: true|
-| building           | references | foreign_key: true|
-| telephone          | references | null: false, foreign_key: true|
+| post_code          | integer    | null: false, foreign_key: true|
+| sender_id          | integer    | null: false |
+| city               | string     | null: false, foreign_key: true|
+| street             | string     | null: false, foreign_key: true|
+| building           | string     |             |
+| telephone          | integer    | null: false, foreign_key: true|
+| buy                | references | null: false, foreign_key: true|
 
 ### Association
-- belongs_to :buys
+- belongs_to :buy
