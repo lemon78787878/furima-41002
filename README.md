@@ -55,12 +55,12 @@
 
 | Column             | Type       | Options     |
 | ------------------ | ---------- | ----------- |
-| post_code          | integer    | null: false, foreign_key: true|
+| post_code          | string     | null: false |
 | sender_id          | integer    | null: false |
 | city               | string     | null: false, foreign_key: true|
 | street             | string     | null: false, foreign_key: true|
 | building           | string     |             |
-| telephone          | integer    | null: false, foreign_key: true|
+| telephone          | string     | null: false, foreign_key: true|
 | buy                | references | null: false, foreign_key: true|
 
 ### Association
