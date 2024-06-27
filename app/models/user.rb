@@ -5,7 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'は全角文字を使用してください' } do
-    validates :nickname
     validates :first_name
     validates :last_name
   end
@@ -15,8 +14,8 @@ class User < ApplicationRecord
     validates :rb_first_name
   end
 
+  validates :nickname, presence: true
   validates :birthday, presence: true
-
   validate :password_complexity
 
   private
