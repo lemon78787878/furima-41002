@@ -11,9 +11,10 @@ class Item < ApplicationRecord
     validates :item
     validates :description
     validates :price
+    validates :image
   end
 
-  with_options presence: true, numericality: { other_than: 1 } do
+  with_options presence: true, numericality: { other_than: 1, message: 'あてはまるものを選択してください' } do
     validates :category_id
     validates :condition_id
     validates :post_cost_id
