@@ -7,6 +7,7 @@ window.addEventListener('turbo:load', () => {
     const tax = Math.floor(inputValue * 0.1);
     addTaxDom.innerHTML = tax;
 
+      // 販売利益を計算（金額-販売手数料で求められる）
     const addTaxDomI = document.getElementById("profit");
     const taxi = Math.floor(inputValue * 0.1);
     const abc = inputValue - taxi;
