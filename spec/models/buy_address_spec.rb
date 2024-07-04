@@ -19,5 +19,37 @@ RSpec.describe BuyAddress, type: :model do
       @buy_address.valid?
       expect(@buy_address.errors.full_messages).to include("Post code can't be blank")
     end
+    it 'post_codeに「-」がなければ保存できないこと' do
+      @buy_address.post_code = '1111111'
+      @buy_address.valid?
+      expect(@buy_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+    end
+
+    it 'sender_idが空では保存できないこと' do
+      @buy_address.sender_id = nil
+      @buy_address.valid?
+      expect(@buy_address.errors.full_messages).to include("Sender の項目を選択してください")
+    end
+
+    it 'cityが空では保存できないこと' do
+      @buy_address.city = ''
+      @buy_address.valid?
+      expect(@buy_address.errors.full_messages).to include("City can't be blank")
+    end
+
+    it 'streetが空では保存できないこと' do
+      @buy_address.street = ''
+      @buy_address.valid?
+      expect(@buy_address.errors.full_messages).to include("Street can't be blank")
+    end
+
+    it 'telephoneが空では保存できないこと' do
+      @buy_address.telephone = ''
+      @buy_address.valid?
+      expect(@buy_address.errors.full_messages).to include("Telephone can't be blank")
+    end
   end
 end
+
+#実施： bundle exec rspec spec/models/buy_address_spec.rb
+
