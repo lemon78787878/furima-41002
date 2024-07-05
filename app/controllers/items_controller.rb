@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
   before_action :set_item, only: [:show, :edit, :update]
   before_action :check_owner, only: [:edit]
+  before_action :check_if_sold, only: [:edit]
 
   def index
     @items = Item.order("created_at DESC")
@@ -54,6 +55,12 @@ class ItemsController < ApplicationController
   def check_owner
     unless @item.user == current_user
       redirect_to root_path
+    end
+  end
+
+  def check_if_sold
+    if @item.buy.present?
+      redirect_to root_path, alert: 'この商品はすでに購入されています。'
     end
   end
 

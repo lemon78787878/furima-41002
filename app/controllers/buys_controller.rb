@@ -1,4 +1,7 @@
 class BuysController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :check_if_sold, only: [:index, :create]
+  before_action :check_owner, only: [:index, :create]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -33,6 +36,20 @@ class BuysController < ApplicationController
       card: buy_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def check_if_sold
+    @item = Item.find(params[:item_id])
+    if @item.buy.present?
+      redirect_to root_path, alert: 'この商品はすでに購入されています。'
+    end
+  end
+
+  def check_owner
+    @item = Item.find(params[:item_id])
+    if @item.user == current_user
+      redirect_to root_path
+    end
   end
 
 end
