@@ -19,7 +19,6 @@ class BuysController < ApplicationController
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       render :index, status: :unprocessable_entity
     end
-    #フォームオブジェクトのインスタンスを生成し、インスタンス変数に代入する
   end
 
   private
@@ -43,7 +42,7 @@ class BuysController < ApplicationController
 
   def check_if_sold
     if @item.buy.present?
-      redirect_to root_path, alert: 'この商品はすでに購入されています。'
+      redirect_to root_path
     end
   end
 
@@ -52,5 +51,7 @@ class BuysController < ApplicationController
       redirect_to root_path
     end
   end
+
+
 
 end
