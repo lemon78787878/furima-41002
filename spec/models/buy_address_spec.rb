@@ -35,8 +35,8 @@ RSpec.describe BuyAddress, type: :model do
     end
 
 
-    it 'sender_idが空では保存できないこと' do
-      @buy_address.sender_id = nil
+    it 'sender_idがid: 1では保存できないこと' do
+      @buy_address.sender_id = '1'
       @buy_address.valid?
       expect(@buy_address.errors.full_messages).to include("Sender の項目を選択してください")
     end
@@ -74,11 +74,22 @@ RSpec.describe BuyAddress, type: :model do
       expect(@buy_address.errors.full_messages).to include("Telephone は10桁または11桁の半角数値で入力してください")
     end
 
-
     it "tokenが空では登録できないこと" do
       @buy_address.token = nil
       @buy_address.valid?
       expect(@buy_address.errors.full_messages).to include("Token can't be blank")
+    end
+
+
+    it "user_idが空だと登録できない" do
+      @buy_address.user_id = nil
+      @buy_address.valid?
+      expect(@buy_address.errors.full_messages).to include("User can't be blank")
+    end
+    it "item_idが空だと登録できない" do
+      @buy_address.item_id = nil
+      @buy_address.valid?
+      expect(@buy_address.errors.full_messages).to include("Item can't be blank")
     end
   end
 end
