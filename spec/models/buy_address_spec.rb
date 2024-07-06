@@ -58,11 +58,22 @@ RSpec.describe BuyAddress, type: :model do
       @buy_address.valid?
       expect(@buy_address.errors.full_messages).to include("Telephone can't be blank")
     end
-    it 'telephoneは、10桁以上11桁以内の半角数値のみ保存可能なこと' do
+    it 'telephoneは、9桁以下では登録できないこと' do
+      @buy_address.telephone = '999999999'
+      @buy_address.valid?
+      expect(@buy_address.errors.full_messages).to include("Telephone は10桁または11桁の半角数値で入力してください")
+    end
+    it 'telephoneは、12桁以上では登録できないこと' do
       @buy_address.telephone = '111111111111'
       @buy_address.valid?
       expect(@buy_address.errors.full_messages).to include("Telephone は10桁または11桁の半角数値で入力してください")
     end
+    it 'telephoneは、半角数字以外が含まれている場合、登録できないこと' do
+      @buy_address.telephone = '111-111-1111'
+      @buy_address.valid?
+      expect(@buy_address.errors.full_messages).to include("Telephone は10桁または11桁の半角数値で入力してください")
+    end
+
 
     it "tokenが空では登録できないこと" do
       @buy_address.token = nil
