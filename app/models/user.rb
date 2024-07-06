@@ -18,6 +18,9 @@ class User < ApplicationRecord
   validates :birthday, presence: true
   validate :password_complexity
 
+  has_many :items
+  has_many :buys
+
   private
 
   def password_complexity
